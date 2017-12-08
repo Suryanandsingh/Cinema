@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+    <img src="{{ movieID.movie_logo }}">
+    <h1>{{ movieID.movie_name }}</h1>
+    <h2>{{ movieID.actor }}</h2>
+<ul>
+    {% for song in movieID.song_set.all %}
+    <li>{{ song.song_name }} - {{ song.file_type }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

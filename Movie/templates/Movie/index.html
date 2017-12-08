@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+{% if all_movie %}
+<ul>
+    {% for movie in all_movie %}
+    <!--<li><a href="{{ movie.id }}/">{{ movie.movie_name }}</a> </li>-->
+    <li><a href="{% url 'Movie:detail' movie.id %}">{{ movie.movie_name }}</a> </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <h1>No movie</h1>
+{% endif %}
+    </body>
+</html>
