@@ -17,6 +17,7 @@ class song(models.Model):
     movie = models.ForeignKey(movies, on_delete=models.CASCADE)
     file_type = models.CharField(max_length=10)
     song_name = models.CharField(max_length=50)
+    audio = models.FileField(default='')
 
     def __str__(self):
         return self.song_name

@@ -1,17 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detail</title>
-</head>
-<body>
-    <img src="{{ movieID.movie_logo }}">
-    <h1>{{ movieID.movie_name }}</h1>
-    <h2>{{ movieID.actor }}</h2>
-<ul>
-    {% for song in movieID.song_set.all %}
-    <li>{{ song.song_name }} - {{ song.file_type }}</li>
-    {% endfor %}
-</ul>
-</body>
-</html>
+{% extends 'Movie/home_navbar.html' %}
+{% block body %}
+<div class="container-fluid songs-container">
+
+    <div class="row">
+
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'Movie:detail' movie.id %}">
+                        {% if movie.movie_logo %}
+                            <img src="{{ movie.movie_logo }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{ movie.movie_name }} <small>{{ movie.genre }}</small></h1>
+                    <h2>{{ movie.actor }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'Movie:detail' movie.id %}">View All</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Songs</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Audio File</th>
+                        </tr>
+                        </thead>
+                         <tbody>
+                        {% for song in movie.song_set.all %}
+                            <tr>
+                                <td>{{ song.song_name }}</td>
+                                <td>
+                                    <a target="_blank" href="{{ song.audio.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+</tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

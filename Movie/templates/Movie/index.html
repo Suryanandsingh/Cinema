@@ -1,17 +1,41 @@
-<html>
-    <head>
-        <title>Home</title>
-    </head>
-    <body>
-{% if all_movie %}
-<ul>
-    {% for movie in all_movie %}
-    <!--<li><a href="{{ movie.id }}/">{{ movie.movie_name }}</a> </li>-->
-    <li><a href="{% url 'Movie:detail' movie.id %}">{{ movie.movie_name }}</a> </li>
-    {% endfor %}
-</ul>
-{% else %}
-    <h1>No movie</h1>
-{% endif %}
-    </body>
-</html>
+{% extends 'Movie/home_navbar.html' %}
+{% block body %}
+
+<!--{% if all_movie %}-->
+<!--<ul>-->
+    <!--{% for movie in all_movie %}-->
+    <!--&lt;!&ndash;<li><a href="{{ movie.id }}/">{{ movie.movie_name }}</a> </li>&ndash;&gt;-->
+    <!--<li><a href="{% url 'Movie:detail' movie.id %}">{{ movie.movie_name }}</a> </li>-->
+    <!--{% endfor %}-->
+<!--</ul>-->
+<!--{% else %}-->
+    <!--<h1>No movie</h1>-->
+<!--{% endif %}-->
+<div class="albums-container container-fluid">
+
+    <!-- Albums -->
+    <div class="row">
+        <div class="col-sm-12">
+            <!--<h3>{{ user.username }}'s Albums</h3>-->
+        </div>
+        {% if all_movie %}
+            {% for movie in all_movie %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="{% url 'Movie:detail' movie.id %}">
+                            <img src="{{ movie.movie_logo }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ movie.movie_name }}</h2>
+                            <h4>{{ movie.actor }}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'Movie:detail' movie.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

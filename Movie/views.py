@@ -21,8 +21,8 @@ def detail(request, movie_id):
     except movies.DoesNotExist:
         raise Http404('Movie does not exist')'''
     #same as above is
-    movieID = get_object_or_404(movies, pk=movie_id)
+    movie = get_object_or_404(movies, pk=movie_id)
     context = {
-        'movieID':movieID,
+        'movie':movie,
     }
     return render(request, 'Movie/detail.html', context)
