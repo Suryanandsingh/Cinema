@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <a href="{% url 'Movie:detail' movie.id %}">
                         {% if movie.movie_logo %}
-                            <img src="{{ movie.movie_logo }}" class="img-responsive">
+                            <img src="{{ movie.movie_logo.url }}" class="img-responsive">
                         {% else %}
                             <h3>No image to display</h3>
                         {% endif %}

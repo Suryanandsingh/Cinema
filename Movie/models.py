@@ -7,7 +7,7 @@ class movies(models.Model):
     movie_name = models.CharField(max_length=100)
     actor = models.CharField(max_length=100)
     genre = models.CharField(max_length=10)
-    movie_logo = models.CharField(max_length=200)
+    movie_logo = models.FileField()
 
     def __str__(self):
         return self.movie_name + '-->' + self.actor
