@@ -49,11 +49,17 @@
                             <tr>
                                 <td>{{ song.song_name }}</td>
                                 <td>
-                                    <a target="_blank" href="{{ song.audio.url }}">
-                                        <button type="button" class="btn btn-success btn-xs">
-                                            <span class="glyphicon glyphicon-play"></span>&nbsp; Play
-                                        </button>
-                                    </a>
+                                    <!--<a target="_blank" href="{{ song.audio.url }}">-->
+                                    <!--<button type="button" class="btn btn-success btn-xs">-->
+                                            <!--<span class="glyphicon glyphicon-play"></span>&nbsp; Play-->
+                                            <!--</button>-->
+
+                                        <audio controls>
+                                            <source src="{{ song.audio.url }}" type="audio/mpeg">
+
+                                        </audio>
+
+                                    <!--</a>-->
                                 </td>
                             </tr>
                         {% endfor %}

@@ -7,4 +7,5 @@ urlpatterns=[
     url(r'^(?P<movie_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^login/$', views.Login, name='login'),
     url(r'^signup/$',views.registeration, name='registeration'),
+    url(r'^logout/$',views.Logout, name='logout')
 ]

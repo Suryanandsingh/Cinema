@@ -11,13 +11,18 @@ from .forms import UserFrom
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 
 def index(request):
     all_movie = movies.objects.all()
+    query = request.GET.get("q")
+    if query:
+        all_movie = all_movie.filter(Q(actor__icontains=query) | Q(movie_name__icontains=query))
     context ={
         'all_movie':all_movie,
     }
+
     return render(request, 'Movie/index.html', context)
 
 
@@ -37,10 +42,10 @@ def detail(request, movie_id):
 
 def Login(request):
     if request.method=='POST':
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
         try:
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('/home/')
@@ -60,9 +65,15 @@ def registeration(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             User.objects.create_user(username=username, email=email, password=password)
+            usr = authenticate(username=username, password=password)
+            login(request, usr)
             messages.success(request, 'Your Registration successfully.')
             return redirect('/home/')
 
     else:
         form = UserFrom()
     return render(request, 'Movie/register.html', {'form':form})
+
+def Logout(request):
+    logout(request)
+    return redirect('/home/')

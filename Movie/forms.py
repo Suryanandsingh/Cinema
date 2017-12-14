@@ -19,3 +19,21 @@ class UserFrom(forms.ModelForm):
     class Meta():
         model = User
         fields = ['username', 'email', 'password']
+
+    #validation of unique email
+    # def clean_email(self):
+    #     email = self.cleaned_data['email']
+    #     try:
+    #         match = User.objects.get('email')
+    #     except:
+    #         return self.cleaned_data['email']
+    #     raise forms.ValidationError('email already exists !')
+    # def clean_cnfm_password(self):
+    #     paswrd = self.cleaned_data['password']
+    #     cnfm_pass = self.cleaned_data['confirm_password']
+    #     if paswrd and cnfm_pass:
+    #         if paswrd != cnfm_pass:
+    #             raise forms.ValidationError('Password did not match !')
+    #         else:
+    #             if len(paswrd)<8:
+    #                 raise forms.ValidationError('password too short')
