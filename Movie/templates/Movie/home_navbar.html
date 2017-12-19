@@ -37,8 +37,12 @@
                     {% if user.username %}
                     <li>
                         <a href="{% url 'Movie:logout' %}">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                            <span class="glyphicon glyphicon-off" aria-hidden="true" onclick="return confirm('Are you sure to logout?')"></span>&nbsp; Logout
                         </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'Movie:profile' %}" role="button" style="color: green;" class="glyphicon glyphicon-user">{{ user.username }}
+                          </a>
                     </li>
                     {% else %}
                     <li>

@@ -1,0 +1,15 @@
+{% extends 'Movie/home_navbar.html' %}
+{% block body %}
+
+ <title>{{ user }}</title>
+
+<body>
+    <div class="container">
+        <h1 style="color: green;">Profile Details Of {{ user.first_name }}</h1>
+        <p>Name : {{ user.first_name }}</p>
+        <p>Username : {{ user }}</p>
+        <p>Email : {{ user.email }}</p>
+    </div>
+</body>
+
+{% endblock %}

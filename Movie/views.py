@@ -42,10 +42,10 @@ def detail(request, movie_id):
 
 def Login(request):
     if request.method=='POST':
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
         try:
-            user = authenticate(request, email=email, password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('/home/')
@@ -62,9 +62,10 @@ def registeration(request):
         form = UserFrom(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            User.objects.create_user(username=username, email=email, password=password)
+            User.objects.create_user(username=username, first_name=first_name, email=email, password=password)
             usr = authenticate(username=username, password=password)
             login(request, usr)
             messages.success(request, 'Your Registration successfully.')
@@ -73,6 +74,11 @@ def registeration(request):
     else:
         form = UserFrom()
     return render(request, 'Movie/register.html', {'form':form})
+
+
+def profile(request):
+    args = {'user': request.user}
+    return render(request, 'Movie/profile.html', args)
 
 def Logout(request):
     logout(request)
