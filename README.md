@@ -2,6 +2,8 @@
 
 ## listening or Download latest song of bollywood
 
+For run : localhost/home
+
 In Home page, you can choose as your need movie's song and you can find the movie through search box.
 
 ![screenshot from 2017-12-20 20-20-08](https://user-images.githubusercontent.com/27296935/34212886-b5075d62-e5c3-11e7-90c0-05dd65d624a9.png)
